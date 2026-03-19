@@ -1,9 +1,7 @@
 from rest_framework.routers import DefaultRouter
-
 from backlog.api.views import SprintHistoriaViewSet
 
+router_backlog = DefaultRouter()
+router_backlog.register(prefix="sprint-historias", viewset=SprintHistoriaViewSet, basename="sprint-historias")
 
-router = DefaultRouter()
-router.register(r'sprint-historias', SprintHistoriaViewSet, basename='sprint-historias')
-
-urlpatterns = router.urls
+urlpatterns = router_backlog.urls
