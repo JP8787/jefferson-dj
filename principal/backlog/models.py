@@ -4,7 +4,7 @@ class Sprint(models.Model):
     id_sprint = models.IntegerField(primary_key=True)
 
     class Meta:
-        managed = False          # la tabla ya existe
+        managed = False         
         db_table = "sprint"
 
 class HistoriaUsuario(models.Model):
@@ -15,12 +15,11 @@ class HistoriaUsuario(models.Model):
         db_table = "historia_usuario"
 
 class SprintHistoria(models.Model):
-    id = models.AutoField(primary_key=True)  # surrogate PK sencilla
-    sprint = models.ForeignKey(Sprint, on_delete=models.DO_NOTHING, db_column="id_sprint")
-    historia_usuario = models.ForeignKey(HistoriaUsuario, on_delete=models.DO_NOTHING, db_column="id_historia")
+    id_sprint = models.IntegerField(primary_key=True)
+    id_historia = models.IntegerField()
     fecha_asignacion = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        managed = False          # usamos la tabla existente
+        managed = False         
         db_table = "sprint_historia"
-        unique_together = ("sprint", "historia_usuario")
+        unique_together = ("id_sprint", "id_historia")
